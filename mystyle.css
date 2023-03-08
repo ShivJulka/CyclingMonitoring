@@ -1,0 +1,797 @@
+
+html, body {
+	font-family: Helvetica;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+h1
+{
+    text-align: center;
+    font-weight: 600;
+    font-size: 110px;
+    color: white;
+	margin: 0px;
+}
+h2
+{
+    color: #191919;
+    font-size: 50px;
+	text-align: center;
+}
+p
+{
+    color: white;
+    font-weight: 550;
+	font-size: 20px;
+}
+.para
+{
+	color: black;
+	font-weight: 550;
+	font-size: 30px;
+}
+/* Index/Home page */
+html{
+    background-color: #FAFAFA;
+	
+    scroll-snap-type: mandatory;                                                                                         
+    scroll-snap-type: y mandatory;
+    
+    /*scroll-snap-points-y: repeat(10vh);*/
+}
+.titleIcon
+{
+  float: left;
+  position: relative;
+  bottom:400px;
+  right: 100px;
+  font-size: 50px;
+  font-weight: 700;
+  color: black; 
+  text-decoration: none;
+  padding:20;
+}
+
+/* The navigation bar */
+.fixedBar{
+  z-index: 999;
+  overflow: hidden;
+  background-color: #4d4d4d;
+  position: fixed; /* Set the navbar to fixed position */
+  bottom: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+.fixedBar a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: right;
+  padding: 14px 16px;
+  font-size: 20px;
+  text-decoration: none;
+}
+.fixedBar a:hover {
+  float: right;
+  background-color: #ddd;
+  color: black;
+  display: block;
+}
+
+
+
+section {
+  padding: 1rem;
+  height: 100vh;
+  scroll-snap-align: start;
+  text-align: center;
+  position: relative;
+}
+.homeBox
+{
+ float: left;	
+	
+}
+.homeText{
+	margin: 0;
+	
+}
+.homeContainer
+{
+
+}
+.one 
+{
+	text-align: center;
+	
+background-color: #4d4d4d;
+}
+/*
+.imgMain{
+
+	width: 40%;
+	height: auto;
+	
+}
+*/
+@media only screen and (max-width: 480px) {
+  .imgMain {
+    width: 40%;
+	
+	
+	  
+
+  }
+}
+
+
+.two {
+  
+}
+
+.three {
+}
+
+.four {
+  
+}
+.contactContent
+{
+    width: 10%;
+    height: 110px;
+    border-radius: 25px;
+    background-color: #4d4d4d;
+    color: white;
+    float:left;
+    padding: 20px;
+    margin: 20px; 
+	border: 1px solid #4d4d4d;
+	
+}
+.contactContainer
+{
+  display: flex;
+  justify-content: center;
+}
+
+/* Login Page*/
+ .Logincontainer
+{
+    width: 65%;
+    height: 100%;
+	float: left;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+	margin: 0;
+	padding: 0;
+}
+.signUpContainer
+{
+    float: right;
+    width: 35%;
+    height: 100%;
+    background-color: #4d4d4d;
+	text-align: center;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+	margin: 0;
+	padding: 0;
+	
+	
+	
+}
+.inputLogin
+{
+	border-radius: 20px;
+	width: 50%;
+	border: none;
+	padding: 20px;
+	background-color: #ECECEC;
+	margin: 10px;
+	font-weight: 500;
+	align-content: center;
+}
+.loginButton
+{
+	width: 1%;
+	border-radius: 20px;
+	padding: 15px;
+	background-color: #4d4d4d;
+	margin: 10px;
+    color: white;
+	font-weight: 500;
+}
+.loginButton
+{
+	width: 50%;
+	border-radius: 20px;
+	padding: 15px;
+	background-color: #4d4d4d;
+	margin: 10px;
+    color: white;
+	font-weight: 500;
+}
+.signupButton
+{
+	width: 50%;
+	border-radius: 20px;
+	padding: 15px;
+	background-color: white;
+	margin: 10px;
+    color: black;
+	font-weight: 500;
+}
+.h1_Login
+{
+	
+}
+.h2_login
+{
+	color: white;
+	font-size: 50px;
+	fofont-weight: 600;
+	
+}
+.p_sub
+{
+	
+}
+#loginPasswordBoxes{
+  width: 90%;
+  padding-top: 30px;
+  margin: auto;
+
+}
+.right {
+    float: left;
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 59px;
+}
+
+#Regbutton
+{
+    text-align: center;
+    align-content: center;
+    display: block;
+    width: 5%;
+    outline: none;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    color:white;
+    cursor: pointer;
+    border-radius: 10px;
+    top: 1%;
+    right:5%;
+    position: fixed;
+    z-index: 10;
+   
+}
+.homeLogin{
+    width: 200px;
+    margin: 0 auto;
+    display: inline;
+}
+
+#Logbutton
+{
+    display: block;
+    width: 5%;
+    outline: none;
+    border: none;
+    padding: 14px 10px;
+    font-size: 16px;
+    color:white;
+    cursor: pointer;
+    border-radius: 10px;
+    position:fixed;
+    top: 1%;
+    right:10%;
+    z-index: 10;
+   
+}
+
+#Regbutton:hover,#Logbutton:hover
+{
+    background-color:#4DC599;
+    text-decoration: underline;
+}
+#Regbutton:active,#Logbutton:active
+{
+    background-color: #DBDBDB;
+    transform: translateY(4px);
+}
+
+
+/*Login Verify Page*/
+.loader
+{
+    margin:auto;
+    bottom: 50%;
+    left:auto;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin 
+{
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+  @keyframes spin 
+{
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/*Registration Page*/
+#regBox
+{
+    margin: auto;
+    width: 90%;
+    height: 90%;
+    background-color: gray;
+}
+/*make the nav bar scale to phones*/
+
+.navBar
+  {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+	margin-left: 20%
+	
+  }
+
+/*Animating the button*/
+#weight, #overallProgress, #home, #runInfo, #settings
+{
+    display: block;
+    float: left;
+    margin-right:00.5%;
+    margin-left: 00.5%;
+    outline: none;
+    border: none;
+    background-color: #4d4d4d;
+    font-size: 16%;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 9px;
+    box-shadow: 0 9px #999;
+    width: 19%;
+    max-height: 100%;
+    height: auto;
+}
+
+#weight:active, #overallProgress:active, #home:active, #runInfo:active, #settings:active
+{
+  background-color: #4d4d4d;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#weight:hover, #overallProgress:hover, #home:hover, #runInfo:hover, #settings:hover
+{
+  background-color:#ccccff;
+}
+
+/*scaling Images*/
+#weightButton, #progressbutton, #homeButton, #runButton, #settingsButton
+{
+  max-width: 100%;
+    width: auto;
+    max-height: 50px;
+    height: 100%;
+    
+}
+/*For the Map Page*/
+.map {
+    height: 60vh;
+    width: 70%;
+    padding-left: 220px;
+    padding-top: 80px;
+  }
+.mapWrapper
+{
+	margin: 0;
+	height: 10%;
+	width: 100%;
+}
+.grid-container {
+  display: grid;
+  grid-template-rows: repeat(2, 50%);
+  grid-template-columns: repeat(2, 42%);
+  grid-gap: 1px;
+  height: fit-content;
+  top: 0;
+  padding-left: 220px;
+  color: #b6b0b0;
+  padding-bottom: 50px;
+}
+
+.grid-container > div {
+  background-color: #4d4d4d;
+  text-align: center;
+  padding: 10px;
+  font-size: 35px;
+  font-weight: 700;
+  color: white;
+  top: 0;
+}
+.statText
+{
+	color: #e3dede;
+	font-size: 25px;
+	display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.hidden{
+  display:none
+}
+
+/*save button*/
+
+
+#History {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#History td, #History th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#History tr{
+  font-size: 20px;
+}
+#History tr:nth-child(even){background-color:#E9E9E9;}
+
+#History tr:hover {background-color: #ddd;}
+
+#History th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #45504c;
+  color: white;
+}
+  
+  
+  /*Container with all the elements in the middle*/
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.playPauseButtons,
+.stopButtonDiv,
+.ResetButtonDiv,
+.saveButton {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  padding: 10px;
+  border: none;
+  margin: 0;
+  outline: none;
+}
+
+#playButton {
+  height: 60px;
+  width: 60px;
+}
+
+#resetButton {
+  height: 60px;
+  width: 60px;
+}
+
+#stopButton {
+  height: 60px;
+  width: 60px;
+  margin: 0;
+}
+
+#saveBtn {
+  color: white;
+  height: 60px;
+  width: 60px;
+  background-color: #45504c;
+  margin: 0;
+  padding: 10px;
+  width: auto;
+  border-radius: 20px;
+  border: none;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+#saveBtn:hover {
+  background-color: #ccccff;
+}
+
+#saveBtn:active {
+  background-color: #00b8e6;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+/*setting page*/
+  .Setting{
+    
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 90%;
+    left: auto;
+    justify-content: center;
+  }
+  
+/*
+Animating the button */
+  #buttonLogout,#buttonPrivacyrights,#buttonAccountdetails,#buttonAccessibility,#buttonTermsandconditions,#buttonHistory,#buttonDayNightmode,#buttonLanguage,#lanEnglish,#cSoon
+{
+    display: block;
+    outline: none;
+    border: none;
+    background-color: #4d4d4d;
+    font-size: 40px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    width: 40%;
+    
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+
+}
+
+#buttonLogout:active,#buttonPrivacyrights:active,#buttonAccountdetails:active,#buttonAccessibility:active,#buttonTermsandconditions:active,#buttonHistory:active,#buttonDayNightmode:active,#buttonLanguage:active,#lanEnglish:active,#cSoon:active
+{
+  background-color: #4d4d4d;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#buttonLogout:hover,#buttonPrivacyrights:hover,#buttonAccountdetails:hover,#buttonAccessibility:hover,#buttonTermsandconditions:hover,#buttonHistory:hover,#buttonDayNightmode:hover,#buttonLanguage:hover,#lanEnglish:hover,#cSoon:hover
+{
+  background-color:#45504c;
+}
+.buttonContainer
+{
+  display: flex;
+  justify-content: center;
+  height: 20%;
+
+}
+/*Progress Page*/
+.runInfoBody
+{
+  margin-top: 20px;
+  background-color: green;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  padding-bottom: 15px;
+  border-radius: 10px;
+}
+.runInfoButtons
+{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+#prev,#next
+{
+    display: block;
+    outline: none;
+    border: none;
+    background-color: #45504c;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    width: 40%;
+}
+#prev:active,#next:active
+{
+  background-color: #4d4d4d;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#next:hover,#prev:hover
+{
+  background-color:#ccccff;
+}
+#columnchart_material
+{
+  width: 90%;
+  height: 350px;
+  margin: auto;
+}
+#next
+{
+  float: right;
+}
+#prev
+{
+  
+  float: left;
+}
+#historyBtn
+{
+  width: 95%;
+  display: block;
+}
+/* languagepage */
+#languageBox
+{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Termsandconditionpage */
+#tacBox,#privacyBox
+{
+  display: block;
+  border-radius: 25px;
+  background-color: #45504c;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+#privacyBox
+{
+  margin-bottom: 80px;
+}
+
+
+/* accountdetails */
+#AccountDetails
+{
+  display: block;
+  width: 90%;
+  text-align: center;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+  
+}
+
+#Delete
+{
+  display: block;
+  outline: none;
+  border: none;
+  background-color: #275a67;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  width: 180px;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#Delete:active
+{
+  background-color: #4CAF50;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#Delete:hover
+{
+  background-color:#ccccff;
+}
+
+/* RunInfo */
+#guyPicture
+{
+  max-width: 208px;
+  max-height: 465px;
+  width: auto;
+  height: auto;
+}
+#runInfoTop{
+  
+  margin: auto;
+  align-content: center;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 90%;
+  max-height: 350px;
+  width: auto;
+
+  
+}
+#historyHeading
+{
+  text-align: center;
+}
+#runInfoBottom
+{
+  border-radius: 10px;
+  margin: auto;
+  width: 90%;
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px; 
+}
+#adviseSpan
+{
+  border: #0086b3;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: lightblue;
+}
+
+
+/* login page style */
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #45504c;
+  color: white;
+}
+/* progress page */

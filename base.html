@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <link  href ="mystyle.css" type ="text/css"  rel ="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block head %}
+        <title>Base</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="fixedBar">
+          <a href="index.html">Home</a>
+          <a href="progress.php">Progress</a>
+          <a href="login.php">Login</a>
+          <a href="register.php">Register</a>
+        </div>
+        {% block body %}
+        {% endblock %}
+    </body>
+
+</html>
