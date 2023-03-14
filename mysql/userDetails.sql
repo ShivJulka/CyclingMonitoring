@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `userdata`
 --
 
-CREATE TABLE `userdata` (
+CREATE TABLE `racedata` (
   `distance` float NOT NULL,
   `speed` float NOT NULL,
   `time` time NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `userdata` (
 --
 -- Indexes for table `userdata`
 --
-ALTER TABLE `userdata`
+ALTER TABLE `racedata`
   ADD PRIMARY KEY (`ID`,`username`);
 
 --
@@ -58,7 +58,7 @@ ALTER TABLE `userdata`
 --
 -- AUTO_INCREMENT for table `userdata`
 --
-ALTER TABLE `userdata`
+ALTER TABLE `racedata`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
