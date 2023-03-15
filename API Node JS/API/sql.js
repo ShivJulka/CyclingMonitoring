@@ -1,7 +1,9 @@
 var sql = require("mssql");
 
 exports.execute = async (sqlQuery, config, encrypt = false) => {
+  console.log(sql.connect(config));
   let pool = await new sql.connect(config);
+  
   
   try {
     const request = pool.request();
@@ -12,6 +14,7 @@ exports.execute = async (sqlQuery, config, encrypt = false) => {
         " CLOSE SYMMETRIC KEY SQLSymmetricKey;";
     }
     const result = await request.query(sqlQuery);
+    console.log(result);
     pool.close();
     return result;
   } catch (err) {

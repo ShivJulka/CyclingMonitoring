@@ -1,21 +1,23 @@
 
 
 exports.Cycling = { 
-  user: "root",
-  password: "",
-  server: "127.0.0.1",
+  user: "user1",
+  password: "1234",
+  server: "localhost\\SQLEXPRESS",
   port: 1433,
-  database: "test",
+  database: "master",
   options: {
     enableArithAbort: true,
-    instanceName: "test",
-    //IntegratedSecurity: true,
+    instanceName: "master",
+    IntegratedSecurity: true,
 
-    //cryptoCredentialsDetails: {
-    // minVersion: "TLSv1",
-    //},
+    cryptoCredentialsDetails: {
+     minVersion: "TLSv1",
+    },
     trustServerCertificate: true,
   },
   connectionTimeout: 30000,
   requestTimeout: 0,
+
+  
 };

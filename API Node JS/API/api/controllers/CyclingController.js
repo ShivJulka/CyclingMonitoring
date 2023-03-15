@@ -214,6 +214,7 @@ exports.getAllData = async function (req, res, next) {
   //gets all the racedata for aparticulatr user
 
     console.log("recived!");
+
 try{
   await sql.execute(
       `SELECT * FROM racedata WHERE username = ${sql.sqlString(req.query.username)}`,

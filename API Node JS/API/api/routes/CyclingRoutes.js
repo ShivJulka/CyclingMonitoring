@@ -7,7 +7,7 @@ module.exports = function (app) {
   
   app.route("/Cycling/addData").post(Cycling.addData);
 
-  app.route("Cycling/getData").get(Cycling.getAllData);
+  app.route("/Cycling/getData").get(Cycling.getAllData);
 
 
 
