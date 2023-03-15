@@ -1,5 +1,5 @@
 <?php
-	require('connect.php');
+/*	require('connect.php');
     // If the values are posted, insert them into the database.
     if (isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
@@ -9,7 +9,7 @@
 
         $mdHash = md5($password);
  
-        $query = "INSERT INTO `user` (username, password, email) VALUES ('$username', '$mdHash', '$email')";
+        $query = "INSERT INTO `users` (username, password, email) VALUES ('$username', '$mdHash', '$email')";
         $result = mysqli_query($connection, $query);
         if($result){
             $smsg = "User Created Successfully.";
@@ -17,7 +17,8 @@
             $fmsg ="User Registration Failed";
         }
     }
-    ?>
+    */?>
+    
 <html>
 <head>
 
@@ -31,6 +32,9 @@
 
 </head>
 <body>
+<script src="Scripts/register.js"></script>
+
+
 <div class="fixedBar">
             <a href="index.html" style="float: left; margin-left: 20px; font-size: 30px; font-weight: bold;">Cycling</a>
             <a href="settings.html">Settings</a>
