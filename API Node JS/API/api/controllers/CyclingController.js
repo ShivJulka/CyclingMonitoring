@@ -103,8 +103,8 @@ return next();
 exports.updatePassword = async function (req, res, next) {
 
   var passCheck = await sql.execute(
-    `SELECT pswrd FROM [scanmeDB].[dbo].[users] 
-    WHERE id = ${sql.sqlString(req.query.id)}`,
+    `SELECT password FROM users
+    WHERE email = ${sql.sqlString(req.query.email)}`,
     config.Cycling
   );
 
@@ -113,20 +113,19 @@ exports.updatePassword = async function (req, res, next) {
 
   if(!passCompare)
   {
-    
     res.status(404).send(("404").toString());
     return next();
   }
   delete passCheck.recordset[0].pswrd;
 
  // req.query.newpass = bcrypt.hash(req.query.password, salt);
-  req.query.newpass = await bcrypt.hash(req.query.newpass, salt);
+  req.query.password = await bcrypt.hash(req.query.password, salt);
 
 
   await sql.execute(
     `UPDATE [scanmeDB].[dbo].[user]
-    SET pswrd = ${sql.sqlString(req.query.newpass)}
-    WHERE id= ${sql.sqlString(req.query.id)}`,
+    SET password = ${sql.sqlString(req.query.password)}
+    WHERE email= ${sql.sqlString(req.query.email)}`,
     config.Cycling
   );
 
@@ -141,8 +140,9 @@ exports.SignUp = async function (req, res, next) {
   req.query.email = req.query.email.toLowerCase();
 
   var checkExists = await sql.execute(
-    `SELECT id FROM [scanmeDB].[dbo].[users] 
-    WHERE email = ${sql.sqlString(req.query.email)}`,
+    `SELECT * FROM users
+    WHERE email = ${sql.sqlString(req.query.email)} 
+    OR username= ${sql.sqlString(req.query.username)} `,
     config.Cycling
   );
 
@@ -159,13 +159,11 @@ exports.SignUp = async function (req, res, next) {
   newPass = await bcrypt.hash(newPass, parseInt(salt));
   
   await sql.execute(
-    `INSERT INTO [scanmeDB].[dbo].[user] (email,pswrd,first_name,last_name,is_verified) 
+    `INSERT INTO users (username,email,password) 
     VALUES (
+      ${sql.sqlString(req.query.username)}
       ${sql.sqlString(req.query.email)},
-      ${sql.sqlString(newPass)},
-      ${sql.sqlString(req.query.first_name)},
-      ${sql.sqlString(req.query.last_name)},
-      0)`,
+      ${sql.sqlString(newPass)})`,
       config.Cycling
     );
   
@@ -216,11 +214,9 @@ exports.getAllData = async function (req, res, next) {
     console.log("recived!");
 
 try{
-  await sql.execute(
-      `SELECT * FROM racedata WHERE username = ${sql.sqlString(req.query.username)}`,
-      config.Cycling
-  );
+  await sql.execute(`SELECT * FROM racedata WHERE username = 'shiv' `,config.Cycling);
 
+  console.log("p!");
   res.sendStatus(200).end();
   return next();
 
@@ -228,6 +224,7 @@ try{
 }
   catch(e)
   {
+    console.log("ERRORORO!")
     res.sendStatus(400).end();
     return next();
   }

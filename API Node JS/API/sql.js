@@ -1,7 +1,7 @@
 var sql = require("mssql");
 
 exports.execute = async (sqlQuery, config, encrypt = false) => {
-  console.log(sql.connect(config));
+  
   let pool = await new sql.connect(config);
   
   
