@@ -5,6 +5,7 @@ const salt = bcrypt.genSalt(10);
 
 exports.Login = async function (req, res, next) {
 
+  console.log(req.query.email);
   req.query.email = req.query.email.toLowerCase();
 /*
   var passCheck = await sql.execute(
@@ -96,8 +97,8 @@ delete user[0].password;
 res.status(200).send(user);
 return next();
 
-
 }
+
 
 
 exports.updatePassword = async function (req, res, next) {
@@ -214,7 +215,8 @@ exports.getAllData = async function (req, res, next) {
     console.log("recived!");
 
 try{
-  await sql.execute(`SELECT * FROM racedata WHERE username = 'shiv' `,config.Cycling);
+  console.log(config.Cycling);
+  await sql.execute(`SELECT * FROM users WHERE username = 'shiv' `,config.Cycling);
 
   console.log("p!");
   res.sendStatus(200).end();
@@ -224,7 +226,7 @@ try{
 }
   catch(e)
   {
-    console.log("ERRORORO!")
+    console.log("ERROR!")
     res.sendStatus(400).end();
     return next();
   }

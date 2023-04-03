@@ -45,12 +45,11 @@
         </div>
 
 <div class="Logincontainer">
-     <a href="index.html" class="titleIcon">Flow<font color="#3cbc8c">Track</font></a>
+      <a href="/Website/index.html" class="titleIcon">Cycling<font color="#3cbc8c">Monitoring</font></a>
+      
       <form class="loginSubContain" method="POST">
       
-      <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> <?php echo $smsg; ?> </div><?php } ?>
-      <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> <?php echo $fmsg; ?> </div><?php } ?>
-        <h2 class="">Please Register</h2>
+    <h2 class="">Please Register</h2>
        
 	  <input type="text" name="username" class="inputLogin" placeholder="Username" required>
       <input type="email" name="email" id="inputEmail" class="inputLogin" placeholder="Email address" required autofocus>
@@ -62,7 +61,7 @@
 			<a onclick="window.location.href='./settingPages/tAndC.html'">Accept Terms and Condtions</a>
           </label>
         </div>
-        <button class="loginButton" type="submit">Register</button>
+        <button class="loginButton" type="submit" onclick="registerUser" >Register</button>
         
       </form>
 </div>

@@ -1,10 +1,7 @@
 import { ip } from './serverAddress';
 
 
-const registerForm = document.querySelector('#register-form');
-registerForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
+function registerUser() {
   const username = document.querySelector('#username').value;
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
@@ -32,4 +29,4 @@ registerForm.addEventListener('submit', (event) => {
     console.error(error);
     alert('An error occurred while processing your request.');
   });
-});
+}

@@ -3,13 +3,13 @@
 exports.Cycling = { 
   user: "user1",
   password: "1234",
-  server: "localhost\\SQLEXPRESS",
+  server: "DESKTOP-0HCMOLI\\SQLEXPRESS",
   port: 1433,
-  database: "master",
+  database: "Cycling",
   
   options: {
     enableArithAbort: true,
-    instanceName: "master",
+    instanceName: "Cycling",
     //encrypt: true,
     
     //IntegratedSecurity: true,
@@ -17,7 +17,7 @@ exports.Cycling = {
     //cryptoCredentialsDetails: {
     // minVersion: "TLSv1",
     //},
-    trustServerCertificate: false,
+    trustServerCertificate: true,
     //trustedConnection: true,
   },
   //pool:{
@@ -30,3 +30,4 @@ exports.Cycling = {
 
   
 };
+

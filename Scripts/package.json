@@ -1,5 +1,6 @@
 {
   "dependencies": {
     "gpx-parse": "^0.10.4"
-  }
+  },
+  "type": "module"
 }
