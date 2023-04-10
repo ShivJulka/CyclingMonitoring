@@ -145,14 +145,13 @@ exports.Register = async function (req, res, next) {
 
   console.log("hello------------------------------------");
 
- /* if (!req.body.email) {
+  if (req.query.email) {
+    req.query.email = req.query.email.toLowerCase();
+  } else {
     console.log("Email is required");
     res.status(400).json({ error: "Email is required" });
     return;
-  } */
-
-  req.query.email = req.query.email.toLowerCase();
-
+  }
   var checkExists = await sql.execute(
     `SELECT * FROM users
     WHERE email = ${sql.sqlString(req.query.email)} 

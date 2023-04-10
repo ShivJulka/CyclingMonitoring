@@ -26,13 +26,18 @@ function registerUser(event) {
   console.log(weight);
 
   const formData = new FormData();
-  formData.append('username', username);
+  formData.username= username;
+  formData.email= email;
+  formData.password= password;
+  formData.age= age;
+  formData.height= height;
+  formData.weight= weight;
+  /*
   formData.append('email', email);
   formData.append('password', password);
   formData.append('age', age);
   formData.append('height', height);
-  formData.append('weight', weight);
-
+  formData.append('weight', weight); */
 
 
   fetch("http://192.168.1.192:8082/Cycling/signup", {
