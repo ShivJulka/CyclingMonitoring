@@ -5,7 +5,7 @@ const salt = bcrypt.genSalt(10);
 
 exports.Login = async function (req, res, next) {
 
-  console.log(req.query.email);
+ /* console.log(req.query.email);
   req.query.email = req.query.email.toLowerCase();
 /*
   var passCheck = await sql.execute(
@@ -50,7 +50,7 @@ exports.Login = async function (req, res, next) {
   
 
 
-*/
+
 
 var passCheck = await sql.execute(
   `SELECT password FROM users 
@@ -95,9 +95,101 @@ if(user[0].is_verified == false)
 delete user[0].password;
 
 res.status(200).send(user);
-return next();
+return next(); **/
 
+  console.log(req.query.username);
+  req.query.email = req.query.username.toLowerCase();
+
+  var passCheck = await sql.execute(
+    `SELECT password, is_verified FROM users WHERE email = ${sql.sqlString(req.query.email)}`,
+    config.Cycling
+  );
+
+  if (passCheck.length != 1) {
+    res.status(403).send(("403").toString());
+    return next();
+  }
+
+  var passCompare = await bcrypt.compare(req.query.password, passCheck[0].password);
+
+  if (!passCompare) {
+    res.status(404).send(("404").toString());
+    return next();
+  }
+
+  if (!passCheck[0].is_verified) {
+    // send email to user which makes the is_verified 1
+    res.status(402).send(("402").toString());
+    return next();
+  }
+
+  var user = await sql.execute(
+    `SELECT username, age, height, weight, is_verified FROM users WHERE email = ${sql.sqlString(req.query.email)}`,
+    config.Cycling
+  );
+
+  if (user.length != 1) {
+    res.status(403).send(("403").toString());
+    return next();
+  }
+
+  delete user[0].password;
+
+  res.status(200).send(user);
+  return next();
 }
+
+
+
+exports.Register = async function (req, res, next) {
+
+  console.log("hello------------------------------------");
+
+ /* if (!req.body.email) {
+    console.log("Email is required");
+    res.status(400).json({ error: "Email is required" });
+    return;
+  } */
+
+  req.query.email = req.query.email.toLowerCase();
+
+  var checkExists = await sql.execute(
+    `SELECT * FROM users
+    WHERE email = ${sql.sqlString(req.query.email)} 
+    OR username= ${sql.sqlString(req.query.username)} `,
+    config.Cycling
+  );
+
+  if(checkExists.recordset.length >= 1)
+  {
+    console.log("User already exists");
+    res.sendStatus(400).end();;
+    return next();
+  }
+
+  let newPass = req.query.password.toString();
+
+  newPass = await bcrypt.hash(newPass, parseInt(salt));
+
+  await sql.execute(
+    `INSERT INTO users (username,email,password,age,height,weight) 
+    VALUES (
+      ${sql.sqlString(req.query.username)},
+      ${sql.sqlString(req.query.email)},
+      ${sql.sqlString(newPass)},
+      ${sql.sqlString(req.query.age)},
+      ${sql.sqlString(req.query.height)},
+      ${sql.sqlString(req.query.weight)})`,
+      config.Cycling
+  );
+ 
+
+  delete newPass;
+  delete req.query.password;
+  
+  res.sendStatus(200).end();
+  return next();
+};
 
 
 
@@ -136,44 +228,7 @@ exports.updatePassword = async function (req, res, next) {
 }
 
 
-exports.SignUp = async function (req, res, next) {
 
-  req.query.email = req.query.email.toLowerCase();
-
-  var checkExists = await sql.execute(
-    `SELECT * FROM users
-    WHERE email = ${sql.sqlString(req.query.email)} 
-    OR username= ${sql.sqlString(req.query.username)} `,
-    config.Cycling
-  );
-
-  if(checkExists.recordset.length >= 1)
-  {
-    
-    res.sendStatus(400).end();;
-    return next();
-  }
-
-
-  let newPass = req.query.password.toString();
-
-  newPass = await bcrypt.hash(newPass, parseInt(salt));
-  
-  await sql.execute(
-    `INSERT INTO users (username,email,password) 
-    VALUES (
-      ${sql.sqlString(req.query.username)}
-      ${sql.sqlString(req.query.email)},
-      ${sql.sqlString(newPass)})`,
-      config.Cycling
-    );
-  
-  delete newPass;
-  delete req.query.password;
-  
-  res.sendStatus(200).end();
-  return next();
-};
 
 
 exports.addData = async function (req, res, next) {

@@ -15,11 +15,11 @@ function login() {
     redirect: 'follow'
   };
   
-  fetch("192.168.1.192:8082/Cycling/login?email=test@gmail.com&password=123", requestOptions)
+ /* fetch("192.168.1.192:8082/Cycling/login?email=test@gmail.com&password=123", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-
+*/
 
 
   xhr.open("GET","192.168.1.192:8082/Cycling/login", true);
