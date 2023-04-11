@@ -17,13 +17,32 @@ function registerUser(event) {
     return;
   }
 
-  console.log("Registering User");
-  console.log(username);
-  console.log(email);
-  console.log(password);
-  console.log(age);
-  console.log(height);
-  console.log(weight);
+  var requestOptions = {
+    method: 'POST',
+    redirect: 'follow'
+  };
+  
+  fetch("http://192.168.1.192:8082/Cycling/signup?username="+username+"&email="+email+"&password="+password+"&age="+age+"&height="+height+"&weight="+weight, requestOptions)
+    .then((response) => {
+      if(response.status == '200')
+      {
+          //change to home page
+      }
+      else if(response.status == '400')
+      {
+        //user already exits
+      }
+      else 
+      {
+        //something went wrong
+      }
+    })
+   
+    .catch(error => console.log('error', error));
+
+    /*
+
+
 
   const formData = new FormData();
   formData.username= username;
@@ -32,12 +51,6 @@ function registerUser(event) {
   formData.age= age;
   formData.height= height;
   formData.weight= weight;
-  /*
-  formData.append('email', email);
-  formData.append('password', password);
-  formData.append('age', age);
-  formData.append('height', height);
-  formData.append('weight', weight); */
 
 
   fetch("http://192.168.1.192:8082/Cycling/signup", {
@@ -62,4 +75,5 @@ function registerUser(event) {
   console.error(error);
   alert('An error occurred while processing your request.');
 });
+*/
 }

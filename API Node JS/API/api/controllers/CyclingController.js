@@ -145,7 +145,13 @@ exports.Register = async function (req, res, next) {
 
   console.log("hello------------------------------------");
 
+  console.log(req.query.email);
+  console.log(req.query);
+  console.log(req.body);
+
   if (req.query.email) {
+
+    
     req.query.email = req.query.email.toLowerCase();
   } else {
     console.log("Email is required");
@@ -162,7 +168,7 @@ exports.Register = async function (req, res, next) {
   if(checkExists.recordset.length >= 1)
   {
     console.log("User already exists");
-    res.sendStatus(400).end();;
+    res.sendStatus(400).end();
     return next();
   }
 
