@@ -20,7 +20,7 @@ Runtime for isomorphic javascript libraries (that work in the browser and node.j
 ### In the browser
 - Run `npm run build`
 - Set the subscriptionId and token then
-- Open index.html file in the browser. It should show the response from GET request on the storage account. From Chrome type Ctrl + Shift + I and you can see the logs in console.
+- Open home.html file in the browser. It should show the response from GET request on the storage account. From Chrome type Ctrl + Shift + I and you can see the logs in console.
 
 ## Architecture Overview
 

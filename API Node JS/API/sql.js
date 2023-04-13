@@ -14,7 +14,6 @@ exports.execute = async (sqlQuery, config, encrypt = false) => {
         " CLOSE SYMMETRIC KEY SQLSymmetricKey;";
     }
     const result = await request.query(sqlQuery);
-    console.log(result);
     pool.close();
     return result;
   } catch (err) {

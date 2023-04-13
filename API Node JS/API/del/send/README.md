@@ -93,7 +93,7 @@ supported clients from making conditional requests during the life of the
 
 ##### index
 
-By default send supports "index.html" files, to disable this
+By default send supports "home.html" files, to disable this
 set `false` or to supply a new index pass a string or an array
 in preferred order.
 
@@ -181,7 +181,7 @@ var http = require('http')
 var send = require('send')
 
 var server = http.createServer(function onRequest (req, res) {
-  send(req, '/path/to/index.html')
+  send(req, '/path/to/home.html')
     .pipe(res)
 })
 

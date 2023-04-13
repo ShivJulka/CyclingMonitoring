@@ -23,7 +23,7 @@ declare module 'path' {
              */
             dir: string;
             /**
-             * The file name including extension (if any) such as 'index.html'
+             * The file name including extension (if any) such as 'home.html'
              */
             base: string;
             /**
@@ -46,7 +46,7 @@ declare module 'path' {
              */
             dir?: string | undefined;
             /**
-             * The file name including extension (if any) such as 'index.html'
+             * The file name including extension (if any) such as 'home.html'
              */
             base?: string | undefined;
             /**

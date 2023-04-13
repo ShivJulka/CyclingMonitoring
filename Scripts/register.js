@@ -2,6 +2,7 @@
 
 
 function registerUser(event) {
+  
   event.preventDefault(); // prevent default form submission behavior
 
   console.log("registerUser");
@@ -21,28 +22,37 @@ function registerUser(event) {
     method: 'POST',
     redirect: 'follow'
   };
-  
+
   fetch("http://192.168.1.192:8082/Cycling/signup?username="+username+"&email="+email+"&password="+password+"&age="+age+"&height="+height+"&weight="+weight, requestOptions)
-    .then((response) => {
-      if(response.status == '200')
-      {
-          //change to home page
-      }
-      else if(response.status == '400')
-      {
-        //user already exits
-      }
-      else 
-      {
-        //something went wrong
-      }
+    .then(response => {
+        if (response.ok) {
+            // handle successful response
+            console.log('User Created Successfully.');
+            alert('User Created Successfully.')
+            window.location.pathname = "../CyclingMonitoring/home.html";
+
+            // do something with response data
+            return response.json();
+        } else if (response.status === 400) {
+            // handle error response
+            console.log('User Registration Failed. User already exists');
+            alert('User Registration Failed. User already exists')
+            throw new Error("User already exists");
+        } else {
+            // handle other error response
+            console.log('Something Went Wrong.');
+            throw new Error("Something Went Wrong");
+        }
     })
-   
+    .then(data => {
+        // handle response data
+        console.log(data);
+    })
     .catch(error => console.log('error', error));
 
     /*
 
-
+    
 
   const formData = new FormData();
   formData.username= username;

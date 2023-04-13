@@ -1,55 +1,65 @@
 
-function login() {
+function login(event) {
+
+  event.preventDefault(); // prevent default form submission behavior
 
   console.log("login")
-  let xhr = new XMLHttpRequest();
-  let username = document.getElementById("username").value;
-  let password = document.getElementById("password").value;
-  let params = "username=" + username + "&password=" + password;
+  const email = document.querySelector('input[name="email"]').value;
+  const password = document.querySelector('input[name="password"]').value;
 
-  console.log(username);
-  console.log(password);
+ 
+ 
+  if ( !email || !password) {
+    alert("Please fill in all fields");
+    return;
+  }
+
 
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
   
- /* fetch("192.168.1.192:8082/Cycling/login?email=test@gmail.com&password=123", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-*/
+  fetch("http://192.168.1.192:8082/Cycling/login?email="+email+"&password="+password, requestOptions)   
+    .then(response => {      
+      if (response.status === 200) {
+            // handle successful response
+            console.log('User Logged In Successfully.');
+          // alert('User  Successfully.')
+            //window.location.pathname = "../CyclingMonitoring/home.html";
 
+            //console.log(response.json().username);
+            response.json().then(async(json) =>{
+              //console.log(json[0].username);
+              localStorage.setItem("username",json[0].username);
+              window.location.pathname = "../CyclingMonitoring/record.html";
+            })
+            //console.log(response.json());
+            //localStorage.setItem("username",response.json().username);
+           // window.localStorage.email(email);
 
-  xhr.open("GET","192.168.1.192:8082/Cycling/login", true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function() {
-    if (xhr.status == 200) {
-      let response = xhr.responseText;
-      if (response == "success") {
-        window.location.href = "home.php";
-      } else {
-        alert("Invalid Login Credentials.");
-      }
-    }
-  }
-  xhr.send(params);
+            //console.log(window.localStorage.email);
+            //console.log(localStorage.getItem("username"));
+           // window.location.pathname = "../CyclingMonitoring/record.html";
+
+            // do something with response data
+            //return response.json();
+        } else if (response.status === 400) {
+            // handle error response
+            console.log('Login Failed')
+            //throw new Error("User already exists");
+        } else {
+            // handle other error response
+            console.log('Something Went Wrong.');
+            throw new Error("Something Went Wrong");
+        }
+    })
+
 }
 
-function logout() {
-  let xhr = new XMLHttpRequest();
-  xhr.open("get", "logout.php", true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function() {
-    if (xhr.status == 200) {
-      let response = xhr.responseText;
-      if (response == "success") {
-        window.location.href = "login.php";
-      } else {
-        alert("Logout Failed.");
-      }
-    }
-  }
-  xhr.send();
+function logout(event) {
+
+  window.localStorage.removeItem("email");
+  window.location.pathname = "../CyclingMonitoring/login.html";
+  
 }

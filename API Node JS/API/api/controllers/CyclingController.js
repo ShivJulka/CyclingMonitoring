@@ -5,149 +5,56 @@ const salt = bcrypt.genSalt(10);
 
 exports.Login = async function (req, res, next) {
 
- /* console.log(req.query.email);
-  req.query.email = req.query.email.toLowerCase();
-/*
-  var passCheck = await sql.execute(
-    `SELECT is_verified,pswrd,id FROM [scanmeDB].[dbo].[user] 
-    WHERE email = ${sql.sqlString(req.query.email)}`,
+  
+  if (req.query.email) {    
+    req.query.email = req.query.email.toLowerCase();
+  } else {
+    console.log("Email is required");
+    res.status(400).json({ error: "Email is required" });
+    return;
+  }
+  
+  
+  
+  var checkExists = await sql.execute(
+    `SELECT password FROM users
+    WHERE email = ${sql.sqlString(req.query.email)} 
+  `,
     config.Cycling
   );
 
-  if(passCheck.recordset.length != 1)
+  if(checkExists.recordset.length != 1)
   {
-  
-    res.status(403).send(("403").toString());
+    //User does not exist
+    res.sendStatus(400).end();
     return next();
   }
 
-
-  var passCompare = await bcrypt.compare(req.query.password, passCheck.recordset[0].pswrd);
-
-
-  if(!passCompare)
-  {
+  var passCompare = await bcrypt.compare(req.query.password, checkExists.recordset[0].password);
+  //compares the raw string password to the hashed password in the database
   
-    res.status(404).send(("404").toString());
-    return next();
-  }
-  
-  if(passCheck.recordset[0].is_verified == false)
-  {
-    //send email to user which makes the is_verifited 1
-    res.status(402).send(("402").toString());
-    return next();
-  }
-
-  delete passCheck.recordset[0].pswrd;
-
-
-
-  res.status(200).send(passCheck.recordset);
-  return next();
-
-  ////////
-  
-
-
-
-
-var passCheck = await sql.execute(
-  `SELECT password FROM users 
-  WHERE email = ${sql.sqlString(req.query.email)}`,
-  config.Cycling
-);
-
-if(passCheck.length != 1)
-{
-  res.status(403).send(("403").toString());
-  return next();
-}
-
-var passCompare = await bcrypt.compare(req.query.password, passCheck[0].password);
-
-if(!passCompare)
-{
-  res.status(404).send(("404").toString());
-  return next();
-}
-
-// Add verification column to the MySQL table
-var user = await sql.execute(
-  `SELECT username, age, height, weight, is_verified FROM users 
-  WHERE email = ${sql.sqlString(req.query.email)}`,
-  config.Cycling
-);
-
-if(user.length != 1)
-{
-  res.status(403).send(("403").toString());
-  return next();
-}
-
-if(user[0].is_verified == false)
-{
-  //send email to user which makes the is_verifited 1
-  res.status(402).send(("402").toString());
-  return next();
-}
-
-delete user[0].password;
-
-res.status(200).send(user);
-return next(); **/
-
-  console.log(req.query.username);
-  req.query.email = req.query.username.toLowerCase();
-
-  var passCheck = await sql.execute(
-    `SELECT password, is_verified FROM users WHERE email = ${sql.sqlString(req.query.email)}`,
-    config.Cycling
-  );
-
-  if (passCheck.length != 1) {
-    res.status(403).send(("403").toString());
-    return next();
-  }
-
-  var passCompare = await bcrypt.compare(req.query.password, passCheck[0].password);
-
   if (!passCompare) {
-    res.status(404).send(("404").toString());
+    //Password is incorrect
+    res.sendStatus(400).end();
     return next();
   }
 
-  if (!passCheck[0].is_verified) {
-    // send email to user which makes the is_verified 1
-    res.status(402).send(("402").toString());
-    return next();
-  }
+  console.log("User Logged In Successfully.")
 
-  var user = await sql.execute(
-    `SELECT username, age, height, weight, is_verified FROM users WHERE email = ${sql.sqlString(req.query.email)}`,
-    config.Cycling
-  );
 
-  if (user.length != 1) {
-    res.status(403).send(("403").toString());
-    return next();
-  }
+  var data = await sql.execute(`SELECT username FROM users 
+  WHERE email=${sql.sqlString(req.query.email)}`
+  ,config.Cycling);
 
-  delete user[0].password;
+  console.log(data.recordset);
 
-  res.status(200).send(user);
+  res.status(200).send(data.recordset);
   return next();
 }
 
 
 
 exports.Register = async function (req, res, next) {
-
-  console.log("hello------------------------------------");
-
-  console.log(req.query.email);
-  console.log(req.query);
-  console.log(req.body);
 
   if (req.query.email) {
 
@@ -275,12 +182,19 @@ exports.getAllData = async function (req, res, next) {
     console.log("recived!");
 
 try{
-  console.log(config.Cycling);
-  await sql.execute(`SELECT * FROM users WHERE username = 'shiv' `,config.Cycling);
 
-  console.log("p!");
-  res.sendStatus(200).end();
+ 
+  console.log("username: " + req.query.username);
+  var data = await sql.execute(`SELECT * FROM racedata 
+  WHERE username=${sql.sqlString(req.query.username)}`
+  ,config.Cycling);
+
+
+  console.log(data.recordset);
+ 
+  res.status(200).send(data.recordset);
   return next();
+
 
 
 }

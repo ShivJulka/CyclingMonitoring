@@ -100,7 +100,7 @@ supported clients from making conditional requests during the life of the
 
 ##### index
 
-By default this module will send "index.html" files in response to a request
+By default this module will send "home.html" files in response to a request
 on a directory. To disable this set `false` or to supply a new index pass a
 string or an array in preferred order.
 
@@ -139,7 +139,7 @@ var http = require('http')
 var serveStatic = require('serve-static')
 
 // Serve up public/ftp folder
-var serve = serveStatic('public/ftp', { index: ['index.html', 'index.htm'] })
+var serve = serveStatic('public/ftp', { index: ['home.html', 'index.htm'] })
 
 // Create server
 var server = http.createServer(function onRequest (req, res) {

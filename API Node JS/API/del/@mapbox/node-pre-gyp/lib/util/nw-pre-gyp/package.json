@@ -1,5 +1,5 @@
 {
-"main": "index.html",
+"main": "home.html",
 "name": "nw-pre-gyp-module-test",
 "description": "Node-webkit-based module test.",
 "version": "0.0.1",
