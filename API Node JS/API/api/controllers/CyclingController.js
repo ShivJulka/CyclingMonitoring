@@ -147,39 +147,39 @@ exports.addData = async function (req, res, next) {
 
   //time format originates 00:00:00
   //Distance is KM aka 5.2km 
+  console.log(req.query.username);
+  console.log(req.query.distance);
+  console.log(req.query.time);
+  console.log(req.query.calories);
+  console.log(req.query.speed);
+  console.log(req.query.gpxdata);
 
-  let speed = req.query.distance / req.query.time
 
-
-  try{
-
-
-
+  if(req.query.username && req.query.distance && req.query.time && req.query.calories && req.query.speed){
     await sql.execute(
-      `INSERT INTO racedata (username, distance, time,speed,calories) VALUES (
+      `INSERT INTO racedata (username,distance,time,speed,calories,gpxdata) VALUES (
         ${sql.sqlString(req.query.username)}, ${sql.sqlString(req.query.distance)},${sql.sqlString(req.query.time)},
-        ${sql.sqlString(speed)},${sql.sqlString(req.query.calories)},${sql.sqlString(req.query.gpx)})`,
+        ${sql.sqlString(req.query.speed)},${sql.sqlString(req.query.calories)},${sql.sqlString(req.query.gpxdata)})`,
         config.Cycling
       );
 
       res.sendStatus(200).end();
       return next();
       
-
-  }
-  catch(e)
-  {
+      }
+  
+  else{
+    console.log("ERROR!")
     res.sendStatus(400).end();
     return next();
   }
-
 };
 
 exports.getAllData = async function (req, res, next) {
 
   //gets all the racedata for aparticulatr user
 
-    console.log("recived!");
+  console.log("recived!");
 
 try{
 

@@ -70,7 +70,8 @@ window.onload = function()
                             // Higher time = Less Accuracy AND Less Data
                             // Lower time = More Accuracy AND More Data 
                         }
-                        console.log(GPXdata);
+                        console.log("enabled distance tracking")
+                        
                         buildGpx(); //recursively called;
 
 
@@ -79,6 +80,16 @@ window.onload = function()
                     totalDistance = totalDistance+currentDistance;
                     document.getElementById("distance").innerHTML = Math.round(totalDistance*10)/10;
                     }
+                    console.log("enabled distance tracking")
+
+                    console.log(GPXdata);
+                    //module.exports = GPXdata;
+                    // convert array to JSON string using JSON.stringify()
+                    const jsonArray = JSON.stringify(GPXdata);
+                    console.log(jsonArray);
+                    localStorage.setItem("GPXarray", jsonArray);
+
+
                     lastLat = latitude;
                     lastLong = longitude;
                     totalCalsBurned();

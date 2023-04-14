@@ -1,7 +1,7 @@
 
 function reset()
 {
-	
+	//create cookies with 10 days to expire
 	createCookie("distance", totalDistance , "10");
 	createCookie("time", document.getElementById("display").innerHTML , "10");
 	createCookie("calories", kcal , "10"); 

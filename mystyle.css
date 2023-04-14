@@ -786,4 +786,12 @@ Animating the button */
   background-color: #45504c;
   color: white;
 }
+
+
 /* progress page */
+#progressTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #275a67;
+}
+

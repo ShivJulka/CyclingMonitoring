@@ -94,7 +94,7 @@ var sw = {
     if (sw.timer != null) { sw.stop(); }
     sw.now = -1;
     sw.tick();
-    document.getElementById("track").checked = false;
+    //document.getElementById("track").checked = false;
   },
   save : function () {
 
@@ -103,15 +103,67 @@ var sw = {
     let dist = document.getElementById("distance").innerHTML;
     let cal = document.getElementById("calories").innerHTML;
 
+
+    var timeSplit = time.split(":");
+    //[0]=hours:[1]=minutes:[2]=seconds
+    var hour= (parseInt(timeSplit[0]));
+    var minute= parseInt(timeSplit[1]/60);
+    var second= (parseInt(timeSplit[2]))/60/60;
+    var avgSpeed;
     
-    let avgSpeed = dist / time;
+    var finalTime=hour+minute+second;
+    if (dist == 0) {
+      avgSpeed = 0;
+      speed=0;
+    }
+    else {
+      avgSpeed = dist / finalTime;
+    }
+    let username=window.localStorage.getItem("username");
   
+    // get the JSON string from localStorage
+    const strGPX = localStorage.getItem('GPXarray');
+
+    // convert JSON string to relevant object
+    const parsedGPX = JSON.parse(strGPX);
+
     //SEND TO API;
+    console.log("output");
     console.log(time);
     console.log(speed);
     console.log(cal);
     console.log(avgSpeed);
-    console.log(tag);
+    console.log(parsedGPX);
+
+
+    
+
+    var requestOptions = {
+      method: 'POST',
+      redirect: 'follow'
+    };
+    
+    fetch("http://192.168.1.192:8082/Cycling/addData?username="+username+"&distance="+dist+"&time="+time+"&speed="+avgSpeed+"&calories="+cal+"&gpxdata="+parsedGPX, requestOptions)   
+      .then(response => {      
+        if (response.status === 200) {
+              // handle successful response
+              console.log('saved');
+             alert('Saved.')
+             
+          } else if (response.status === 400) {
+              // handle error response
+              console.log('error saving');
+              alert('Error Saving.');
+              //throw new Error("User already exists");
+          } else {
+              // handle other error response
+              console.log('Something Went Wrong.');
+              throw new Error("Something Went Wrong");
+          }
+      })
+    //console.log(tag);
+
+    window.localStorage.removeItem("GPXdata");
 
 
 

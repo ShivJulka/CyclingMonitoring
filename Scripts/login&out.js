@@ -59,7 +59,7 @@ function login(event) {
 
 function logout(event) {
 
-  window.localStorage.removeItem("email");
+  window.localStorage.removeItem("username");
   window.location.pathname = "../CyclingMonitoring/login.html";
   
 }
