@@ -83,11 +83,34 @@ window.onload = function()
                     console.log("enabled distance tracking")
 
                     console.log(GPXdata);
-                    //module.exports = GPXdata;
-                    // convert array to JSON string using JSON.stringify()
-                    const jsonArray = JSON.stringify(GPXdata);
-                    console.log(jsonArray);
-                    localStorage.setItem("GPXarray", jsonArray);
+                   
+
+                    // Create a GPX file header
+                  /*  var gpxFormat = '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>' +
+                                '<gpx version="1.1" creator="Your App Name">';
+
+                    // Add each location data point to the GPX file
+                    for (var i = 0; i < GPXdata.length; i++) {
+                    var lat = GPXdata[i][0];
+                    var lon = GPXdata[i][1];
+                    var ele = GPXdata[i][2];
+                    var time = GPXdata[i][3];
+
+                    // Create a trkpt element for each location
+                    var trkpt = '<trkpt lat="' + lat + '" lon="' + lon + '">' +
+                                (ele ? '<ele>' + ele + '</ele>' : '') +
+                                '<time>' + time + '</time>' +
+                                '</trkpt>';
+
+                    // Add the trkpt element to the GPX file
+                    gpxFormat += '<trkseg>' + trkpt + '</trkseg>';
+                    }
+
+                    // Close the GPX file
+                    gpxFormat += '</gpx>';
+
+                    // Save the GPX file to local storage
+                    localStorage.setItem('GPXfile', gpxFormat); */
 
 
                     lastLat = latitude;
@@ -95,7 +118,7 @@ window.onload = function()
                     totalCalsBurned();
                     document.getElementById("calories").innerHTML=kcal;
 
-                   
+                 
                     
                 }
                 else if(activeDist==false)

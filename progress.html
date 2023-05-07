@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
 <html lang="en">
-
 <script>
-  console.log(window.localStorage.getItem("username")+" ---");
-  if(window.localStorage.getItem("username") === null)
-  {
-    window.location.pathname = "../CyclingMonitoring/login.html";
-  }
+    console.log(window.localStorage.getItem("username") + " ---");
+    if (window.localStorage.getItem("username") === null) {
+      window.location.pathname = "../CyclingMonitoring/login.html";
+    }
+  </script>
 
 
-
-</script>
-
-
-
-
-
-    <head>
+<head>
+  <meta charset="UTF-8">
+  <title>Progress</title>
+      <link rel="stylesheet" href="mystyle.css">
       <link rel="stylesheet" href="mystyle.css">
       <!-- Include Leaflet CSS -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+  <link rel="stylesheet" href="mystyle.css">
+      <!-- Include Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
 
       <!-- Include Leaflet JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 
       <!-- Include Leaflet.GPX plugin -->
@@ -30,55 +27,66 @@
 
       <!-- Your custom JavaScript code -->
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+      <!-- Include Leaflet.GPX plugin -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.5.0/gpx.js"></script>
+
+      <!-- Your custom JavaScript code -->
+
+      <script type="text/javascript" src="Scripts/tableBuilder.js"></script>
       <script type="text/javascript" src="Scripts/tableBuilder.js"></script>
 
+  <script type="text/javascript" src="Scripts/tableBuilder.js"></script>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <title>Progress</title>
         
 
 
 
-    <script type="text/javascript" src="Scripts/resetHome.js"></script>	 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <title>Progress</title>
+        
 
-    </head>
 
-    <body>
+
+  <script type="text/javascript" src="Scripts/resetHome.js"></script>	 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body onLoad="buildHtmlTable('#excelDataTable')">
   <div class="fixedBar">
-            <a href="home.html" style="float: left; margin-left: 20px; font-size: 30px; font-weight: bold;">Cycling</a>
-            <a href="settings.html">Settings</a>
-            <a href="record.html">Record</a>
-            <a href="login.html">Account</a>
-            <a href="progress.html">Progress</a>
-            <a href="home.html">Home</a>
-        </div>
+    <a href="home.html" style="float: left; margin-left: 20px; font-size: 30px; font-weight: bold;">Cycling</a>
+    <a href="settings.html">Settings</a>
+    <a href="record.html">Record</a>
+    <a href="login.html">Account</a>
+    <a href="progress.html">Progress</a>
+    <a href="home.html">Home</a>
+  </div>
 
-  </head>
+  <div id="table-container">
+    <table id="excelDataTable" class="progressTable"></table>
+  </div>
+
+  <div class="navBar">
+    <button id="overallProgress" onclick="window.location.href='progress.html'">
+      <img id="progressbutton" src="Assets/Images/graphButton.svg" alt="overallProgress" width="100%" height="100%">
+    </button>
+    <button id="home" onclick="window.location.href='record.html'">
+      <img id="homeButton" src="Assets/Images/homeButton.svg" alt="Home" width="100%" height="100%">
+    </button>
+    <button id="settings" onclick="window.location.href='settings.html'">
+      <img id="settingsButton" src="Assets/Images/settingsButton.svg" alt="Settings"  width="100%" height="100%">
+    </button>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+
  
-	</div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-  
-  <body onLoad="buildHtmlTable('#excelDataTable')">
-    <div id="table-container"></div>
-    <table id="excelDataTable" class = "progressTable">
-    </table>
-  </body>
-  
-    </body>
-
- <div class="navBar">
-  <button id="overallProgress" onclick="window.location.href='progress.html'"><img id="progressbutton" src="Assets/Images/graphButton.svg" alt="overallProgress" width="100%" height="100%">
-  </button>
-  <button id="home" onclick="window.location.href='record.html'"><img id="homeButton" src="Assets\Images\homeButton.svg" alt="Home" width="100%" height="100%"></button>
-  <button id="settings" onclick="window.location.href='settings.html'"><img id="settingsButton" src="Assets/Images/settingsButton.svg" alt="Settings"  width="100%" height="100%"></button>
-</div>
-
-
-<div id="map">
-
-</div>
-	
+</body>
 </html>

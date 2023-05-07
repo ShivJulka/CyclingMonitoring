@@ -76,7 +76,16 @@ var sw = {
     if(GPXdata.length > 0)
     {
       this.formatGPX();
+      console.log(tag);
+
     }
+
+    /*module.exports = toString;
+    //convert array to JSON string using JSON.stringify()
+    const jsonArray = JSON.stringify(GPXdata);
+    console.log(jsonArray);
+    localStorage.setItem("GPXarray", jsonArray); */
+
     clearInterval(sw.timer);
     sw.timer = null;
     document.getElementById("playButton").src = "Assets/Images/playImg.svg"
@@ -122,10 +131,10 @@ var sw = {
     let username=window.localStorage.getItem("username");
   
     // get the JSON string from localStorage
-    const strGPX = localStorage.getItem('GPXarray');
+    //const strGPX = localStorage.getItem('GPXarray');
 
     // convert JSON string to relevant object
-    const parsedGPX = JSON.parse(strGPX);
+    //const parsedGPX = JSON.parse(strGPX);
 
     //SEND TO API;
     console.log("output");
@@ -133,7 +142,7 @@ var sw = {
     console.log(speed);
     console.log(cal);
     console.log(avgSpeed);
-    console.log(parsedGPX);
+    console.log(tag);
 
 
     
@@ -143,7 +152,7 @@ var sw = {
       redirect: 'follow'
     };
     
-    fetch("http://192.168.1.192:8082/Cycling/addData?username="+username+"&distance="+dist+"&time="+time+"&speed="+avgSpeed+"&calories="+cal+"&gpxdata="+parsedGPX, requestOptions)   
+    fetch("http://192.168.1.192:8082/Cycling/addData?username="+username+"&distance="+dist+"&time="+time+"&speed="+avgSpeed+"&calories="+cal+"&gpxdata="+tag, requestOptions)   
       .then(response => {      
         if (response.status === 200) {
               // handle successful response
