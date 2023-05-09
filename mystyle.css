@@ -108,9 +108,9 @@ section {
 background-color: #4d4d4d;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 100px) {
   .imgMain {
-    width: 40%;
+    width: 10%;
 	
 	
 	  
@@ -393,15 +393,15 @@ background-color: #4d4d4d;
 /*For the Map Page*/
 .map {
     height: 60vh;
-    width: 70%;
-    padding-left: 220px;
+    width: 74%;
+    padding-left: 26%;
     padding-top: 80px;
   }
 .mapWrapper
 {
 	margin: 0;
 	height: 10%;
-	width: 100%;
+	width: 79%;
 }
 .grid-container {
   display: grid;
@@ -410,9 +410,10 @@ background-color: #4d4d4d;
   grid-gap: 1px;
   height: fit-content;
   top: 0;
-  padding-left: 220px;
+  padding-left: 20%;
   color: #b6b0b0;
   padding-bottom: 50px;
+  width: 70%;
 }
 
 .grid-container > div {

@@ -3,9 +3,10 @@ var config = require("../../config");
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSalt(10);
 
+//A function to login a user
 exports.Login = async function (req, res, next) {
 
-  
+  //Check if email is provided
   if (req.query.email) {    
     req.query.email = req.query.email.toLowerCase();
   } else {
@@ -15,7 +16,7 @@ exports.Login = async function (req, res, next) {
   }
   
   
-  
+  //Check if user exists
   var checkExists = await sql.execute(
     `SELECT password FROM users
     WHERE email = ${sql.sqlString(req.query.email)} 
@@ -41,7 +42,7 @@ exports.Login = async function (req, res, next) {
 
   console.log("User Logged In Successfully.")
 
-
+  //User is logged in successfully
   var data = await sql.execute(`SELECT username FROM users 
   WHERE email=${sql.sqlString(req.query.email)}`
   ,config.Cycling);
@@ -53,7 +54,7 @@ exports.Login = async function (req, res, next) {
 }
 
 
-
+//A function to register a user
 exports.Register = async function (req, res, next) {
 
   if (req.query.email) {

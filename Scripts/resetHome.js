@@ -1,4 +1,7 @@
 
+//APART of the calculations subcategory specqified in the thesis
+
+
 function reset()
 {
 	//create cookies with 10 days to expire

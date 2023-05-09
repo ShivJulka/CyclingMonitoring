@@ -51,7 +51,7 @@ geolocation.on('change', function () {
 geolocation.on('error', function (error) {
   var info = document.getElementById('info');
   info.innerHTML = error.message;
-  info.style.display = '';
+  info.style.display = 'GPS Not Enabled';
 });
 
 var accuracyFeature = new ol.Feature();

@@ -1,3 +1,5 @@
+//APART of the calculations javascript subcategory specified in the thesis
+
 //checking if the browser or phone supports geolocation
 if(navigator.geolocation){console.log('Geolocation Avaliable');}
 else{console.log('Geolocation Error - Not Supported!')}

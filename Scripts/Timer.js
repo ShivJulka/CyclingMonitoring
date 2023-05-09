@@ -1,3 +1,5 @@
+//APART of the calculations javascript subcategory specified in the thesis
+
 var expSecs;
 var outHours;
 var outMins;

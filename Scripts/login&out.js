@@ -38,9 +38,9 @@ function login(event) {
             //localStorage.setItem("username",response.json().username);
            // window.localStorage.email(email);
 
-            //console.log(window.localStorage.email);
-            //console.log(localStorage.getItem("username"));
-           // window.location.pathname = "../CyclingMonitoring/record.html";
+            console.log(window.localStorage.email);
+            console.log(localStorage.getItem("username"));
+            window.location.pathname = "../CyclingMonitoring/record.html";
 
             // do something with response data
             //return response.json();

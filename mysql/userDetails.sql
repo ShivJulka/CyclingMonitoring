@@ -56,12 +56,15 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*
 
-
-/* In SQL server
+-- In SQL server
+--DROP TABLE IF EXISTS racedata, to avoid error when creating table
 DROP TABLE IF EXISTS racedata;
 
+--create the table racedata
 CREATE TABLE racedata (
+  --Populate the table with the following columns
   ID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
   username varchar(255) NOT NULL,
   distance float NOT NULL,
@@ -69,6 +72,6 @@ CREATE TABLE racedata (
   time time NOT NULL,
   calories int NOT NULL,
   timestamp datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  gpxdata varchar(255)
+  gpxdata varchar(MAX)
 );
-/*
+*/

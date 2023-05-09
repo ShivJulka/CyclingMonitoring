@@ -28,8 +28,9 @@ function registerUser(event) {
         if (response.ok) {
             // handle successful response
             console.log('User Created Successfully.');
-            alert('User Created Successfully.')
-            window.location.pathname = "../CyclingMonitoring/home.html";
+            alert('User Created Successfully.');
+            localStorage.setItem("username",json[0].username);
+            window.location.pathname = "../CyclingMonitoring/record.html";
 
             // do something with response data
             return response.json();
