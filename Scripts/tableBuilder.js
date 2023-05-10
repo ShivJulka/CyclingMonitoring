@@ -4,11 +4,14 @@ function buildHtmlTable(selector) {
       method: 'GET',
       redirect: 'follow'
     };
-    let counter=1;
+    let counter = 1;
     const metricSelect = document.getElementById('metric-select');
     const min = document.getElementById('min-range').value;
     const max = document.getElementById('max-range').value;
-  
+    const monthSelect = document.getElementById('month-select');
+
+    let month = 0;
+
     const selectedMetric = metricSelect.value;
     const allCheckbox = document.getElementById('all-checkbox');
   
@@ -19,9 +22,9 @@ function buildHtmlTable(selector) {
             console.log("table");
             console.log(json);
   
-            // filter data based on selected metric and range
+            // filter data based on selected metric, range, and month
             let filteredData = json;
-            if (!allCheckbox.checked && (selectedMetric !== '' || min !== '' || max !== '')) {
+            if (!allCheckbox.checked && (selectedMetric !== '' || min !== '' || max !== '' || monthSelect.value !== '')) {
               if (selectedMetric === 'distance') {
                 if (!isNaN(min) && !isNaN(max)) {
                   filteredData = filteredData.filter(obj => {
@@ -37,22 +40,76 @@ function buildHtmlTable(selector) {
                   });
                 }
               }
+  
+              if (selectedMetric === 'months') {
+                if (!isNaN(min) && !isNaN(max)) {
+                    filteredData = filteredData.filter(obj => {
+                        const dateObj = new Date(obj.timestamp);
+                        let tempmonth = dateObj.toLocaleString('default', { month: 'short' });
+                        switch (tempmonth) {
+                            case "January":
+                              tempmonth = 1;
+                              break;
+                            case "February":
+                              tempmonth = 2;
+                              break;
+                            case "March":
+                              tempmonth = 3;
+                              break;
+                            case "April":
+                              tempmonth = 4;
+                              break;
+                            case "May":
+                              tempmonth = 5;
+                              break;
+                            case "June":
+                              tempmonth = 6;
+                              break;
+                            case "July":
+                              tempmonth = 7;
+                              break;
+                            case "August":
+                              tempmonth = 8;
+                              break;
+                            case "September":
+                              tempmonth = 9;
+                              break;
+                            case "October":
+                              tempmonth = 10;
+                              break;
+                            case "November":
+                              tempmonth = 11;
+                              break;
+                            case "December":
+                              tempmonth = 12;
+                              break;
+                            default:
+                              tempmonth = "Unknown";
+                          }
+                        
+                        return tempmonth >= min && tempmonth <= max;
+                     
+                    });
+                
+              }
             }
+        }
   
             // create table rows
-            let table = '<tr><th>ID</th><th>Distance</th><th>Time</th><th>Speed</th><th></th></tr>';
+            let table = '<tr><th>ID</th><th>Distance</th><th>Time</th><th>Speed</th><th>Month</th><th></th></tr>';
             filteredData.forEach(data => {
-              table += `<tr><td>${counter}</td><td>${data.distance}</td><td>${data.time}</td><td>${data.speed}</td><td><button onclick="viewGPX('')">View GPX</button></td></tr>`;
-                counter++;
+              const dateObj = new Date(data.timestamp);
+              const month = dateObj.toLocaleString('default', { month: 'short' });
+              table += `<tr><td>${counter}</td><td>${data.distance}</td><td>${data.timestamp}</td><td>${data.speed}</td><td>${month}</td><td><button onclick="viewGPX('')">View GPX</button></td></tr>`;
+              counter++;
             });
   
             // add rows to table
             const tableElement = document.querySelector(selector);
             tableElement.innerHTML = table;
   
-  
             // create data array for scatter chart
-            const data = filteredData.map(obj => {
+            const chartData = filteredData.map(obj => {
               const distance = parseFloat(obj.distance);
               const time = parseFloat(obj.time);
               const speed = parseFloat(obj.speed);
@@ -60,14 +117,12 @@ function buildHtmlTable(selector) {
             });
   
             // display scatter chart
-            displayScatterChart(data);
-  
+            displayScatterChart(chartData);
           });
         }
       })
       .catch(error => console.log('error', error));
   }
-  
 
 
 
