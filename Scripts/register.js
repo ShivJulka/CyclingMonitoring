@@ -23,6 +23,7 @@ function registerUser(event) {
     redirect: 'follow'
   };
 
+  
   fetch("http://192.168.1.192:8082/Cycling/signup?username="+username+"&email="+email+"&password="+password+"&age="+age+"&height="+height+"&weight="+weight, requestOptions)
     .then(response => {
         if (response.status === 200) {

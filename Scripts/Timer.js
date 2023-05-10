@@ -50,32 +50,33 @@ var sw = {
   
   // (C) START!
   start : function () {
-     // First, get the user's location using the browser's geolocation API
-     navigator.geolocation.getCurrentPosition(async (position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
 
-      // Use the OpenWeatherMap API to get the current weather information
-      const apiKey = '<6cba30f93dc4d09157267b019fb55e91>';
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`);
-      const data = await response.json();
+ // First, get the user's location using the browser's geolocation API
+navigator.geolocation.getCurrentPosition(async (position) => {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
 
-      // Extract the required information from the response
-      const temperature = data.main.temp;
-      const feelsLike = data.main.feels_like;
-      const description = data.weather[0].description;
+  // Use the OpenWeatherMap API to get the current weather information
+  const apiKey = '<6cba30f93dc4d09157267b019fb55e91>';
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+  const data = await response.json();
 
-      // Do something with the weather information, like assign it to a variable
-      const currentWeather = {
-        temperature: temperature,
-        feelsLike: feelsLike,
-        description: description
-      };
-      
-      console.log(currentWeather);
-    }, (error) => {
-      console.error(error);
-    });
+  // Extract the required information from the response
+  const temperature = data.main.temp;
+  const feelsLike = data.main.feels_like;
+  const description = data.weather[0].description;
+
+  // Do something with the weather information, like assign it to a variable
+  const currentWeather = {
+    temperature: temperature,
+    feelsLike: feelsLike,
+    description: description
+  };
+  console.log(currentWeather);
+}, (error) => {
+  console.error(error);
+});
+    
     sw.timer = setInterval(sw.tick, 1000);
     document.getElementById("playButton").src = "Assets/Images/pauseImg.svg"
     sw.ego.removeEventListener("click", sw.start);
@@ -89,10 +90,10 @@ var sw = {
 
     tag = '<trkseg>';
 
-    //loops over each long,lat and parses them into a string
+    //loops over each longitude, lat and parses them into a string
     for(let i = 0; i < GPXdata.length; i++) {
       tag += `<trkpt lat="${GPXdata[i][0]}" lon="${GPXdata[i][1]}"><ele>${GPXdata[i][2]}</ele> <time>"${GPXdata[i][3]}"</time></trkpt>`; //Opening each position in the 2D array for formatting
-        //concats the string to form GPX
+        //joins the string to form GPX
     }
     tag += '</trkseg></trk></gpx>'
 
@@ -173,6 +174,10 @@ var sw = {
     console.log(tag);
 
     console.log(outSecs);
+
+    if (avgSpeed == undefined) {
+      avgSpeed = 0;
+    }
 
    
 

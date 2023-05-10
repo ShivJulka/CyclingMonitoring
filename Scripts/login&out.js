@@ -15,11 +15,14 @@ function login(event) {
   }
 
 
-  var requestOptions = {
+  var requestOptions = {  
     method: 'GET',
     redirect: 'follow'
   };
   
+  
+
+
   fetch("http://192.168.1.192:8082/Cycling/login?email="+email+"&password="+password, requestOptions)   
     .then(response => {      
       if (response.status === 200) {
