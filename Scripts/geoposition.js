@@ -50,7 +50,7 @@ geolocation.on('change', function () {
 // handle geolocation error.
 geolocation.on('error', function (error) {
   var info = document.getElementById('info');
-  info.innerHTML = error.message;
+  info.innerHTML = "GPS Not Enabled";
   info.style.display = 'GPS Not Enabled';
 });
 

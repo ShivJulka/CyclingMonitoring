@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    console.log(window.localStorage.getItem("username") + " ---");
-    if (window.localStorage.getItem("username") === null) {
-      window.location.pathname = "../CyclingMonitoring/login.html";
-    }
-  </script>
-
-
 <head>
   <meta charset="UTF-8">
   <title>Progress</title>
-      <link rel="stylesheet" href="mystyle.css">
-      <link rel="stylesheet" href="mystyle.css">
-      <!-- Include Leaflet CSS -->
   <link rel="stylesheet" href="mystyle.css">
-      <!-- Include Leaflet CSS -->
+  <!-- Include Leaflet CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
 
-      <!-- Include Leaflet JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-
-      <!-- Include Leaflet.GPX plugin -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.5.0/gpx.js"></script>
-
-      <!-- Your custom JavaScript code -->
-
+  <!-- Include Leaflet JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 
-      <!-- Include Leaflet.GPX plugin -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.5.0/gpx.js"></script>
-
-      <!-- Your custom JavaScript code -->
+  <!-- Include Leaflet.GPX plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.5.0/gpx.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <script type="text/javascript" src="Scripts/tableBuilder.js"></script>
-
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <title>Progress</title>
-        
-
-
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <title>Progress</title>
-        
-
-
-
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="Scripts/resetHome.js"></script>	 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <style>
+
+    #table-container {
+      padding-left: 20%;
+      padding-top: 2%;
+      height: calc(50vh - 100px);
+      overflow-y: auto;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #excelDataTable {
+      width: 70%;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    #excelDataTable th,
+    #excelDataTable td {
+      padding: 8px;
+      border: 1px solid black;
+    }
+
+    #excelDataTable th {
+      background-color: #ddd;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #scatter-chart {
+      width: 70%;
+      padding-left: 15%;
+      height: calc(50vh - 100px);
+    }
+  </style>
 </head>
 
 <body onLoad="buildHtmlTable('#excelDataTable')">
@@ -64,9 +66,29 @@
     <a href="home.html">Home</a>
   </div>
 
-  <div id="table-container">
-    <table id="excelDataTable" class="progressTable"></table>
+  <div>
+    <label for="metric-select">Select metric:</label>
+    <select id="metric-select">
+      <option value="all">All</option>
+      <option value="speed">Speed</option>
+      <option value="distance">Distance</option>
+      <option value="months">Months in Year</option>
+    </select>
+    <input type="number" id="min-range" placeholder="Enter minimum value...">
+    <input type="number" id="max-range" placeholder="Enter maximum value...">
+    <input type="checkbox" id="all-checkbox" checked>
+    <label for="all-checkbox">Show all data</label>
+    <button onclick="buildHtmlTable('#excelDataTable')">Filter</button>
   </div>
+
+  <div id="container">
+    <div id="table-container">
+      <table id="excelDataTable" class="progressTable"></table>
+    </div>
+
+    <div id="scatter-chart"></div>
+  </div>
+
 
   <div class="navBar">
     <button id="overallProgress" onclick="window.location.href='progress.html'">
@@ -82,9 +104,15 @@
 
   <div id="map"></div>
 
+  <script>
+    console.log(window.localStorage.getItem("username") + " ---");
+    if (window.localStorage.getItem("username") === null) {
+      window.location.pathname = "../CyclingMonitoring/login.html";
+    }
+  </script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
- 
 </body>
 </html>
