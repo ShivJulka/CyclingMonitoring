@@ -151,6 +151,8 @@ exports.addData = async function (req, res, next) {
   console.log(req.query.username);
   console.log(req.query.distance);
   console.log(req.query.time);
+  //console.log("timestamp: ");
+  console.log(req.query.timestamp);
   console.log(req.query.calories);
   console.log(req.query.speed);
   console.log(req.query.gpxdata);

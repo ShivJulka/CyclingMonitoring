@@ -25,12 +25,18 @@ function registerUser(event) {
 
   fetch("http://192.168.1.192:8082/Cycling/signup?username="+username+"&email="+email+"&password="+password+"&age="+age+"&height="+height+"&weight="+weight, requestOptions)
     .then(response => {
-        if (response.ok) {
+        if (response.status === 200) {
             // handle successful response
             console.log('User Created Successfully.');
             alert('User Created Successfully.');
-            localStorage.setItem("username",json[0].username);
-            window.location.pathname = "../CyclingMonitoring/record.html";
+            //console.log(response.json().username);
+            
+            //console.log(response.json());
+            //localStorage.setItem("username",response.json().username);
+           // window.localStorage.email(email);
+
+           localStorage.setItem("username",username);
+           window.location.pathname = "../CyclingMonitoring/record.html";
 
             // do something with response data
             return response.json();

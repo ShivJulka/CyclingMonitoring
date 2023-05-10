@@ -96,11 +96,11 @@ function buildHtmlTable(selector) {
         }
   
             // create table rows
-            let table = '<tr><th>ID</th><th>Distance</th><th>Time</th><th>Speed</th><th>Month</th><th></th></tr>';
+            let table = '<tr><th>ID</th><th>Date</th><th>Month</th><th>Distance km</th><th>Speed km/h</th><th>Time seconds</th><th>Calories</th><th>GPX Data</th></tr>';
             filteredData.forEach(data => {
               const dateObj = new Date(data.timestamp);
               const month = dateObj.toLocaleString('default', { month: 'short' });
-              table += `<tr><td>${counter}</td><td>${data.distance}</td><td>${data.timestamp}</td><td>${data.speed}</td><td>${month}</td><td><button onclick="viewGPX('')">View GPX</button></td></tr>`;
+              table += `<tr><td>${counter}</td><td>${data.timestamp}</td><td>${month}</td><td>${data.distance}</td><td>${data.speed}</td><td>${data.time}</td><td>${data.calories}</td><td><button onclick="viewGPX('')">View GPX</button></td></tr>`;
               counter++;
             });
   
@@ -187,10 +187,10 @@ function viewGPX(gpxData) {
       const options = {
         title: yMetric === 'speed' ? 'Speed vs. Time' : 'Distance vs. Time',
         hAxis: {
-          title: 'Time (minutes)'
+          title: 'Time (seconds)'
         },
         vAxis: {
-          title: yMetric === 'speed' ? 'Speed (mph)' : 'Distance (miles)'
+          title: yMetric === 'speed' ? 'Speed (kph)' : 'Distance (km)'
         },
         legend: 'none'
       };
@@ -200,4 +200,14 @@ function viewGPX(gpxData) {
       chart.draw(dataTable, options);
     }
   }
-  
+
+
+
+
+
+
+
+
+
+
+
