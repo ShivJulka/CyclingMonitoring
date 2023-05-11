@@ -15,6 +15,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script type="text/javascript" src="Scripts/tableBuilder.js"></script>
+  <script type="text/javascript" src="Scripts/processGPX.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="Scripts/resetHome.js"></script>	 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -55,6 +56,22 @@
       padding-left: 15%;
       height: calc(50vh - 100px);
     }
+
+     /* .similar-activity-container {
+      position: fixed;
+      top: 0;
+      padding-right: 10px;
+      right: 0;
+      background-color: rgb(62, 134, 122);
+      padding: 10px;
+      z-index: 100;
+      border-bottom: 1px solid black;
+    }
+
+    .similar-activity-btn {
+      margin-left: 10px;
+    } */
+
   </style>
 
 <!-- Load Google Charts library -->
@@ -120,6 +137,14 @@
     <div id="scatter-chart"></div>
 
   </div>
+
+
+  <!-- <div class="similar-activity-container">
+  <button class="similar-activity-btn" onclick="redirectToSimilarActivitiesPage()">Group Similar Journeys</button>
+  </div> -->
+  
+
+
 
 
   <div class="navBar">
