@@ -10,6 +10,10 @@ function buildHtmlTable(selector) {
     const max = document.getElementById('max-range').value;
     const monthSelect = document.getElementById('month-select');
 
+
+    const xValue = document.getElementById('x-select');
+    const yValue = document.getElementById('y-select');
+
     let month = 0;
 
     const selectedMetric = metricSelect.value;
@@ -40,6 +44,15 @@ function buildHtmlTable(selector) {
                   });
                 }
               }
+              else if (selectedMetric === 'time') {
+                if (!isNaN(min) && !isNaN(max)) {
+                  filteredData = filteredData.filter(obj => {
+                    const time = parseFloat(obj.time);
+                    return time >= min && time <= max;
+                  });
+                }
+              }
+  
   
               if (selectedMetric === 'months') {
                 if (!isNaN(min) && !isNaN(max)) {
@@ -107,25 +120,29 @@ function buildHtmlTable(selector) {
             // add rows to table
             const tableElement = document.querySelector(selector);
             tableElement.innerHTML = table;
-  
+            
+            
+
             // create data array for scatter chart
             const chartData = filteredData.map(obj => {
               const distance = parseFloat(obj.distance);
               const time = parseFloat(obj.time);
               const speed = parseFloat(obj.speed);
-              return { distance, time, speed };
+              const dateObj = new Date(obj.timestamp);
+              let months = dateObj.toLocaleString('default', { month: 'short' });
+              months = convertMonthToNumber(months);
+              const calories = parseFloat(obj.calories);
+              return { distance, time, speed , months, calories};
             });
   
             // display scatter chart
-            displayScatterChart(chartData);
+            displayScatterChart(chartData, xValue.value, yValue.value);
+            //function displayScatterChart(chartData)
           });
         }
       })
       .catch(error => console.log('error', error));
   }
-
-
-
 
 
 function viewGPX(gpxData) {
@@ -165,49 +182,80 @@ function viewGPX(gpxData) {
     // open the map in a popup
     const popup = L.popup().setLatLng([0, 0]).setContent("<div id='mapid' style='height: 400px;'></div>").openOn(map);
   }
-  
-  function displayScatterChart(data, yMetric = 'distance') {
-    // create data table for scatter chart
-    google.charts.load('current', {'packages':['corechart']});
-  
-    google.charts.setOnLoadCallback(drawChart);
-  
-    function drawChart() {
-      const dataTable = new google.visualization.DataTable();
-      dataTable.addColumn('number', 'Time');
-      dataTable.addColumn('number', yMetric === 'speed' ? 'Speed' : 'Distance');
-  
-      data.forEach(obj => {
-        const x = obj.time;
-        const y = yMetric === 'speed' ? obj.speed : obj.distance;
-        dataTable.addRow([x, y]);
-      });
-  
-      // create options object for scatter chart
-      const options = {
-        title: yMetric === 'speed' ? 'Speed vs. Time' : 'Distance vs. Time',
-        hAxis: {
-          title: 'Time (seconds)'
-        },
-        vAxis: {
-          title: yMetric === 'speed' ? 'Speed (kph)' : 'Distance (km)'
-        },
-        legend: 'none'
-      };
-  
-      // create and display scatter chart
-      const chart = new google.visualization.ScatterChart(document.getElementById('scatter-chart'));
-      chart.draw(dataTable, options);
+
+
+  function convertMonthToNumber(month) {
+    switch (month) {
+        case "January":
+            return 1;
+        case "February":
+            return 2;
+        case "March":
+            return 3;
+        case "April":
+            return 4;
+        case "May":
+            return 5;
+        case "June":
+            return 6;
+        case "July":
+            return 7;
+        case "August":
+            return 8;
+        case "September":
+            return 9;
+        case "October":
+            return 10;
+        case "November":
+            return 11;
+        case "December":
+            return 12;
+        default:
+            return 0;
     }
-  }
+}
 
 
+  function displayScatterChart(chartData, xMetric, yMetric) {
+    // create data table for scatter chart
+    google.charts.load('current', { 'packages': ['corechart'] });
 
+    google.charts.setOnLoadCallback(drawChart);
 
+    function drawChart() {
+        const dataTable = new google.visualization.DataTable();
 
+        
+        // Add xMetric column
+        dataTable.addColumn('number', xMetric.charAt(0).toUpperCase() + xMetric.slice(1));
 
+        // Add yMetric column
+        dataTable.addColumn('number', yMetric.charAt(0).toUpperCase() + yMetric.slice(1));
 
+        // Add rows to the DataTable
+        chartData.forEach(obj => {
+            let x = obj[xMetric];
+            let y = obj[yMetric];
 
+          
 
+            dataTable.addRow([x, y]);
+        });
 
+        // create options object for scatter chart
+        const options = {
+            title: `${yMetric.charAt(0).toUpperCase() + yMetric.slice(1)} vs. ${xMetric.charAt(0).toUpperCase() + xMetric.slice(1)}`,
+            hAxis: {
+                title: `${xMetric.charAt(0).toUpperCase() + xMetric.slice(1)}`
+            },
+            vAxis: {
+                title: `${yMetric.charAt(0).toUpperCase() + yMetric.slice(1)}`
+            },
+            legend: 'none'
+        };
 
+        // create and display scatter chart
+        const chart = new google.visualization.ScatterChart(document.getElementById('scatter-chart'));
+        chart.draw(dataTable, options);
+    }
+}

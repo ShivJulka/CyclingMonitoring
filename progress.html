@@ -13,7 +13,7 @@
   <!-- Include Leaflet.GPX plugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.5.0/gpx.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script type="text/javascript" src="Scripts/tableBuilder.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="Scripts/resetHome.js"></script>	 
@@ -56,6 +56,11 @@
       height: calc(50vh - 100px);
     }
   </style>
+
+<!-- Load Google Charts library -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="Scripts/tableBuilder.js"></script>
+
 </head>
 
 <body onLoad="buildHtmlTable('#excelDataTable')">
@@ -75,6 +80,8 @@
       <option value="speed">Speed</option>
       <option value="distance">Distance</option>
       <option value="months">Months in Year</option>
+      <option value="time">time in seconds</option>
+
     </select>
     <input type="number" id="min-range" placeholder="Enter minimum value...">
     <input type="number" id="max-range" placeholder="Enter maximum value...">
@@ -86,6 +93,28 @@
   <div id="container">
     <div id="table-container">
       <table id="excelDataTable" class="progressTable"></table>
+    </div>
+
+
+    <div>
+      <label for="x-select">Select metric for X and Y:</label>
+      <select id="x-select">
+        <option value="calories">calories</option>
+        <option value="speed">Speed</option>
+        <option value="distance">Distance</option>
+        <option value="months">Months in Year</option>
+        <option value="time">time</option>
+      </select>
+
+      <select id="y-select">
+        <option value="calories">calories</option>
+        <option value="speed">Speed</option>
+        <option value="distance">Distance</option>
+        <option value="months">Months in Year</option>
+        <option value="time">time</option>
+      </select>
+      
+      <button onclick="buildHtmlTable('#excelDataTable')">Filter</button>
     </div>
 
     <div id="scatter-chart"></div>
