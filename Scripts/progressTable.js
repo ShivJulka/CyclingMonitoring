@@ -1,3 +1,10 @@
+
+let regression;
+
+(async () => {
+  regression = await import('https://cdn.skypack.dev/regression');
+})();
+
 function buildHtmlTable(selector) {
     const myList = '';
     var requestOptions = {
@@ -97,7 +104,7 @@ function buildHtmlTable(selector) {
                               tempmonth = 12;
                               break;
                             default:
-                              tempmonth = "Unknown";
+                              tempmonth = "0";
                           }
                         
                         return tempmonth >= min && tempmonth <= max;
@@ -130,7 +137,8 @@ function buildHtmlTable(selector) {
               const speed = parseFloat(obj.speed);
               const dateObj = new Date(obj.timestamp);
               let months = dateObj.toLocaleString('default', { month: 'short' });
-              months = convertMonthToNumber(months);
+              
+              //months = convertMonthToNumber(months);
               const calories = parseFloat(obj.calories);
               return { distance, time, speed , months, calories};
             });
@@ -216,46 +224,62 @@ function viewGPX(gpxData) {
 }
 
 
-  function displayScatterChart(chartData, xMetric, yMetric) {
-    // create data table for scatter chart
-    google.charts.load('current', { 'packages': ['corechart'] });
+async function calculateLinearRegression(data) {
+  const regressionLib = await regression;
+  const result = regressionLib.linear(data);
+  const gradient = result.equation[0];
+  const yIntercept = result.equation[1];
 
-    google.charts.setOnLoadCallback(drawChart);
+  return data.map(([x, _]) => [x, gradient * x + yIntercept]);
+}
 
-    function drawChart() {
-        const dataTable = new google.visualization.DataTable();
 
-        
-        // Add xMetric column
-        dataTable.addColumn('number', xMetric.charAt(0).toUpperCase() + xMetric.slice(1));
+function displayScatterChart(chartData, xMetric, yMetric) {
+  // create data table for scatter chart
+  google.charts.load('current', { 'packages': ['corechart'] });
 
-        // Add yMetric column
-        dataTable.addColumn('number', yMetric.charAt(0).toUpperCase() + yMetric.slice(1));
+  google.charts.setOnLoadCallback(async () => {
+    await drawChart();
+  });
+  
+  async function drawChart() {
+    const dataTable = new google.visualization.DataTable();
 
-        // Add rows to the DataTable
-        chartData.forEach(obj => {
-            let x = obj[xMetric];
-            let y = obj[yMetric];
+    // Add xMetric column
+    dataTable.addColumn('number', xMetric.charAt(0).toUpperCase() + xMetric.slice(1));
 
-          
+    // Add yMetric column
+    dataTable.addColumn('number', yMetric.charAt(0).toUpperCase() + yMetric.slice(1));
 
-            dataTable.addRow([x, y]);
-        });
+    // Add regression line column
+    dataTable.addColumn('number', 'Regression Line');
 
-        // create options object for scatter chart
-        const options = {
-            title: `${yMetric.charAt(0).toUpperCase() + yMetric.slice(1)} vs. ${xMetric.charAt(0).toUpperCase() + xMetric.slice(1)}`,
-            hAxis: {
-                title: `${xMetric.charAt(0).toUpperCase() + xMetric.slice(1)}`
-            },
-            vAxis: {
-                title: `${yMetric.charAt(0).toUpperCase() + yMetric.slice(1)}`
-            },
-            legend: 'none'
-        };
+    // Extract x and y values from chartData and calculate the regression line
+    const data = chartData.map(obj => [obj[xMetric], obj[yMetric]]);
+    const regressionLine = await calculateLinearRegression(data);
 
-        // create and display scatter chart
-        const chart = new google.visualization.ScatterChart(document.getElementById('scatter-chart'));
-        chart.draw(dataTable, options);
+    // Add rows to the DataTable, including the regression line data
+    for (let i = 0; i < data.length; i++) {
+      dataTable.addRow([...data[i], regressionLine[i][1]]);
     }
+
+    // create options object for scatter chart
+    const options = {
+      title: `${yMetric.charAt(0).toUpperCase() + yMetric.slice(1)} vs. ${xMetric.charAt(0).toUpperCase() + xMetric.slice(1)}`,
+      hAxis: {
+        title: `${xMetric.charAt(0).toUpperCase() + xMetric.slice(1)}`
+      },
+      vAxis: {
+        title: `${yMetric.charAt(0).toUpperCase() + yMetric.slice(1)}`
+      },
+      legend: 'none',
+      series: {
+        1: { lineWidth: 2, pointSize: 0, color: 'red', visibleInLegend: false },
+      },
+    };
+
+    // create and display scatter chart
+    const chart = new google.visualization.ScatterChart(document.getElementById('scatter-chart'));
+    chart.draw(dataTable, options);
+  }
 }
